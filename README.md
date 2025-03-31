@@ -15,3 +15,26 @@ This project is a recreation of the "Chest X-Ray Medical Diagnosis with Deep Lea
 
 ## Project Structure
 
+chest-xray-diagnosis/
+├── notebook.ipynb # Main Jupyter notebook
+├── README.md # This file
+├── requirements.txt # Python dependencies
+├── data/ # (Optional) local data storage
+└── images/ # Visualizations and result figures
+
+## Dataset
+
+- In this project the CheXpert datasetis used, available through tensorflow_datasets.
+- It includes over 200,000 chest radiographs annotated with 14 common pathologies.
+
+## TODOs
+
+- Load and preview dataset
+- Build and train a CNN model
+- Evaluate using AUC and ROC
+- Visualize model decisions with Grad-CAM
+- Write up conclusions and insights
+
+## Author
+
+- Lukas Lohr
