@@ -6,8 +6,8 @@ This project is a recreation of the "Chest X-Ray Medical Diagnosis with Deep Lea
 
 ## Project Objectives
 
-- Load and preprocess the CheXpert chest X-ray dataset.
-- Build a convolutional neural network (CNN) using TensorFlow and Keras.
+- Load and preprocess the CheXpert chest X-ray dataset. (DONE)
+- Build a convolutional neural network (CNN) using TensorFlow and Keras. (DONE)
 - Train and evaluate the model using ROC and AUC metrics.
 - Interpret model predictions with Grad-CAM visualizations.
 
