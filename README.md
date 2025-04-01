@@ -15,12 +15,12 @@ This project is a recreation of the "Chest X-Ray Medical Diagnosis with Deep Lea
 
 ## Project Structure
 
-chest-xray-diagnosis/
-├── notebook.ipynb # Main Jupyter notebook
-├── README.md # This file
-├── requirements.txt # Python dependencies
-├── data/ # (Optional) local data storage
-└── images/ # Visualizations and result figures
+chest-xray-diagnosis/\
+├── train.py # Python script for training
+├── README.md # This file\
+├── requirements.txt # Python dependencies\
+├── archive/ # local data storage\
+└── images/ # Visualizations and result figures\
 
 ## Dataset
 
