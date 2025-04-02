@@ -1,4 +1,4 @@
-# visualize_model_outputs.py - Post-training Grad-CAM visualization
+# Post-training Grad-CAM visualization
 
 import os
 import numpy as np
@@ -8,6 +8,7 @@ from PIL import Image
 import tensorflow as tf
 from keras.models import load_model
 from keras.models import Model
+
 
 # --- Load Metadata ---
 base_dir = "./archive"
@@ -35,16 +36,14 @@ model = load_model("best_model.h5")
 print("Model loaded.")
 
 
-# --- Grad-CAM ---
-def make_gradcam_heatmap(img_array, model, last_conv_layer_name, pred_index=None):
+# --- Grad-CAM Function ---
+def make_gradcam_heatmap(img_array, model, last_conv_layer_name, pred_index):
     grad_model = Model(
         [model.inputs], [model.get_layer(last_conv_layer_name).output, model.output]
     )
 
     with tf.GradientTape() as tape:
         conv_outputs, predictions = grad_model(img_array)
-        if pred_index is None:
-            pred_index = tf.argmax(predictions[0])
         class_channel = predictions[:, pred_index]
 
     grads = tape.gradient(class_channel, conv_outputs)
@@ -56,19 +55,52 @@ def make_gradcam_heatmap(img_array, model, last_conv_layer_name, pred_index=None
     return heatmap.numpy()
 
 
-# --- Visualize for one sample ---
+# --- Create output directory ---
+results_dir = "results/gradcam"
+os.makedirs(results_dir, exist_ok=True)
+
+# --- Select image ---
 sample_image_path = metadata["full_path"].iloc[0]
 sample_image = Image.open(sample_image_path).convert("RGB").resize((224, 224))
 sample_array = np.expand_dims(np.array(sample_image) / 255.0, axis=0)
 
-heatmap = make_gradcam_heatmap(
-    sample_array, model, last_conv_layer_name="conv5_block16_2_conv"
-)
+# --- Predict and get top-3 classes ---
+predictions = model.predict(sample_array)[0]
+num_classes = predictions.shape[0]
+class_names = [
+    f"Class_{i}" for i in range(num_classes)
+]  # fallback if true labels unavailable
 
-# --- Overlay Heatmap ---
-plt.figure(figsize=(6, 6))
-plt.imshow(sample_image)
-plt.imshow(heatmap, cmap="jet", alpha=0.4)
-plt.title("Grad-CAM Overlay")
-plt.axis("off")
-plt.show()
+pred_df = pd.DataFrame({"Class": class_names, "Probability": predictions})
+pred_df = pred_df.sort_values(by="Probability", ascending=False).reset_index(drop=True)
+
+# --- Save raw probabilities to CSV ---
+pred_df.to_csv(os.path.join(results_dir, "prediction_probabilities.csv"), index=False)
+
+# --- Generate and save Grad-CAM for top-3 classes ---
+for i in range(min(3, len(pred_df))):
+    class_name = pred_df.loc[i, "Class"]
+    class_index = int(class_name.split("_")[-1])
+    prob = pred_df.loc[i, "Probability"]
+
+    heatmap = make_gradcam_heatmap(
+        sample_array,
+        model,
+        last_conv_layer_name="conv5_block16_2_conv",
+        pred_index=class_index,
+    )
+
+    plt.figure(figsize=(6, 6))
+    plt.imshow(sample_image)
+    hm = plt.imshow(heatmap, cmap="jet", alpha=0.4)
+    plt.title(f"Grad-CAM for class: {class_name} (p={prob:.2f})")
+    plt.axis("off")
+    cbar = plt.colorbar(hm, shrink=0.7)
+    cbar.set_label("Activation Strength")
+
+    output_path = os.path.join(results_dir, f"gradcam_{class_name}.png")
+    plt.savefig(output_path)
+    plt.close()
+
+print(f"Top-3 Grad-CAM heatmaps saved to: {results_dir}")
+print("Prediction probabilities saved to: prediction_probabilities.csv")
