@@ -87,8 +87,8 @@ train_gen = datagen.flow_from_dataframe(
     dataframe=metadata,
     x_col="full_path",
     y_col="Finding Labels",
-    target_size=(224, 224),
-    batch_size=32,
+    target_size=(128, 128),
+    batch_size=16,
     class_mode="categorical",
     subset="training",
 )
@@ -97,8 +97,8 @@ val_gen = datagen.flow_from_dataframe(
     dataframe=metadata,
     x_col="full_path",
     y_col="Finding Labels",
-    target_size=(224, 224),
-    batch_size=32,
+    target_size=(128, 128),
+    batch_size=16,
     class_mode="categorical",
     subset="validation",
 )
