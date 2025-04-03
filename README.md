@@ -16,9 +16,11 @@ This project is a recreation of the "Chest X-Ray Medical Diagnosis with Deep Lea
 ## Project Structure
 
 chest-xray-diagnosis/\
-├── train.py # Python script for training
 ├── README.md # This file\
-├── requirements.txt # Python dependencies\
+├── Old Versions # Python dependencies\
+├── Simple-Binary-Classifier \
+├── Multi-Label-Classifier \
+├── results \
 ├── archive/ # local data storage\
 └── images/ # Visualizations and result figures\
 
