@@ -25,7 +25,14 @@ This notebook demonstrates a basic CNN approach to classify chest X-ray images a
 
 ## Model Architecture
 
-```text
 Conv2D(64) + ReLU → MaxPooling
 Conv2D(64) + ReLU → MaxPooling
 Flatten → Dense(64) → Dense(1, sigmoid)
+
+## Training Performance
+
+Number of epochs: 3
+Validation split: 10%
+Example output:
+    Accuracy: ~94%
+    Loss: ~0.15

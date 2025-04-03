@@ -24,7 +24,6 @@ chest-xray-diagnosis/\
 ├── archive/ # local data storage\
 └── images/ # Visualizations and result figures\
 
-
 ## Binary Classification
 
 - Goal: detectz whether an X-ray shows signs of pneumonia or is normal
@@ -45,6 +44,7 @@ chest-xray-diagnosis/\
 - It includes over 200,000 chest radiographs annotated with 14 common pathologies.
 ![Figure_1](https://github.com/user-attachments/assets/4f639c98-4c35-4093-baf1-616e6f3456a2)
 ![Figure_2](https://github.com/user-attachments/assets/b0243789-ece0-495f-b29c-024627691e41)
+
 ## TODOs
 
 - Load and preview dataset
@@ -56,4 +56,3 @@ chest-xray-diagnosis/\
 ## Author
 
 - Lukas Lohr
-
