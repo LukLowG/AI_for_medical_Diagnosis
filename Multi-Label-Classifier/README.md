@@ -30,7 +30,13 @@ This notebook tackles the more complex task of detecting multiple diseases per X
   - Dense(14, sigmoid)
 
 - **Loss**: Binary crossentropy (multi-label)
-- **Metric**: Accuracy + ROC AUC (per class)
+- **Metric**: ROC AUC (per class)
+- Area Under (ROC) Curve: Measures how well the model seperates positive vs negative examples across all thresholds
+- AUC = 1 is perfrect seperation
+- AUC ~ 0.5 means the model is guessing randomly
+- Each disease is treted as binary classification problem
+- Compute an AUC per class
+- Average of the AUC per class equals the Overall AUC Score
 
 ---
 
