@@ -24,6 +24,21 @@ chest-xray-diagnosis/\
 ├── archive/ # local data storage\
 └── images/ # Visualizations and result figures\
 
+
+## Binary Classification
+
+- Goal: detectz whether an X-ray shows signs of pneumonia or is normal
+- Model: Custom CNN trained from scratch
+- Data: 2-class chest X-ray data (NORMAL vs. PNEUMONIA)
+- See the according README.md file wihtin the folder for more information
+
+## Multi-Label-Classification
+
+- Goal: Detect multiple possible pathologies (e.g., Cardiomegaly, Effusion, Pneumonia, etc.) from a single X-ray.
+- Model: Transfer learning with DenseNet121 pretrained on ImageNet.
+- NIH ChestX-ray14 dataset (14 possible labels per image).
+- See the according README.md file wihtin the folder for more information
+
 ## Dataset
 
 - In this project the CheXpert datasetis used, available through tensorflow_datasets.
