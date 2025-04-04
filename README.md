@@ -15,25 +15,25 @@ This project is a recreation of the "Chest X-Ray Medical Diagnosis with Deep Lea
 
 ## Project Structure
 
-chest-xray-classification/
-│
-├── README.md
-│
-├── binary-classification/
-│   ├── README.md
-│   ├── notebook.ipynb
-│   └── results/
-│
-├── multi-label-classification/
-    ├── README.md
-    ├── notebook.ipynb
-    ├── model/
-    │   ├── xray_densenet_model.h5
-    │   └── best_model.h5
-    ├── reports/
-        ├── classification_report_1.txt
-        ├── classification_report_3.txt
-        └── classification_report_5.txt
+chest-xray-classification/ \
+│ \
+├── README.md \
+│ \
+├── binary-classification/ \
+│   ├── README.md \
+│   ├── notebook.ipynb \
+│   └── results/ \
+│ \
+├── multi-label-classification/ \
+    ├── README.md \
+    ├── notebook.ipynb \
+    ├── model/ \
+    │   ├── xray_densenet_model.h5 \
+    │   └── best_model.h5 \
+    ├── reports/ \
+        ├── classification_report_1.txt \
+        ├── classification_report_3.txt \
+        └── classification_report_5.txt \
 
 ## Binary Classification
 
