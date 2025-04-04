@@ -47,6 +47,7 @@ chest-xray-classification/ \
 - Goal: Detect multiple possible pathologies (e.g., Cardiomegaly, Effusion, Pneumonia, etc.) from a single X-ray.
 - Model: Transfer learning with DenseNet121 pretrained on ImageNet.
 - NIH ChestX-ray14 dataset (14 possible labels per image).
+- Multi-label: each image can have multiple conditions
 - See the according README.md file wihtin the folder for more information
 
 ## Dataset
@@ -55,6 +56,26 @@ chest-xray-classification/ \
 - It includes over 200,000 chest radiographs annotated with 14 common pathologies.
 ![Figure_1](https://github.com/user-attachments/assets/4f639c98-4c35-4093-baf1-616e6f3456a2)
 ![Figure_2](https://github.com/user-attachments/assets/b0243789-ece0-495f-b29c-024627691e41)
+
+## Model
+
+- **Base model**: `DenseNet121` (pretrained on ImageNet)
+- Top layers:
+  - GlobalAveragePooling2D
+  - Dropout
+  - Dense(14, activation='sigmoid')
+- Trained using:
+  - `binary_crossentropy` loss (multi-label setup)
+  - `AUC` as the main evaluation metric
+
+## Environment
+
+- **Platform**: [Kaggle](https://www.kaggle.com/code)
+- **Hardware**: GPU (NVIDIA Tesla P100 provided by Kaggle)
+- **Software**:
+  - Python 3
+  - TensorFlow 2.x
+  - OpenCV, pandas, NumPy, scikit-learn, Matplotlib
 
 ## Results (Multi-Label Classification)
 
