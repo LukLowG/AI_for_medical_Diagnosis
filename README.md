@@ -15,14 +15,25 @@ This project is a recreation of the "Chest X-Ray Medical Diagnosis with Deep Lea
 
 ## Project Structure
 
-chest-xray-diagnosis/\
-├── README.md # This file\
-├── Old Versions # Python dependencies\
-├── Simple-Binary-Classifier \
-├── Multi-Label-Classifier \
-├── results \
-├── archive/ # local data storage\
-└── images/ # Visualizations and result figures\
+chest-xray-classification/
+│
+├── README.md
+│
+├── binary-classification/
+│   ├── README.md
+│   ├── notebook.ipynb
+│   └── results/
+│
+├── multi-label-classification/
+    ├── README.md
+    ├── notebook.ipynb
+    ├── model/
+    │   ├── xray_densenet_model.h5
+    │   └── best_model.h5
+    ├── reports/
+        ├── classification_report_1.txt
+        ├── classification_report_3.txt
+        └── classification_report_5.txt
 
 ## Binary Classification
 
@@ -45,11 +56,31 @@ chest-xray-diagnosis/\
 ![Figure_1](https://github.com/user-attachments/assets/4f639c98-4c35-4093-baf1-616e6f3456a2)
 ![Figure_2](https://github.com/user-attachments/assets/b0243789-ece0-495f-b29c-024627691e41)
 
-## TODOs
+## Results (Multi-Label Classification)
 
-- Load and preview dataset
-- Build and train a CNN model
-- Evaluate using AUC and ROC
+The multi-label classification model was evaluated at three training stages. Below is a summary of its progression:
+
+| Epochs | Validation AUC | Validation Loss | Precision (micro) | Recall (micro) | F1-score (micro) |
+|--------|----------------|------------------|-------------------|----------------|------------------|
+| 1      | 0.7133         | 0.1688           | 0.48              | 0.00           | 0.01             |
+| 3      | 0.7351         | 0.1679           | 0.46              | 0.01           | 0.02             |
+| 5      | 0.7255         | 0.1669           | 0.46              | 0.01           | 0.01             |
+
+- See full classification reports in the "Multi-Label-Classifier" folder for further information
+
+## Interpretation
+
+- **Validation AUC** shows early signal separation, peaking around epoch 3.
+- **Recall and F1-score remain near zero** across all labels — the model learned to predict "no disease" due to:
+  - Severe class imbalance
+  - Too few training epochs
+  - Frozen DenseNet layers not yet adapted to medical data
+
+## Future Improvements
+
+- Unfreeze DenseNet121 and fine-tune full network
+- Explore Focal Loss for handling class imbalance
+- Train for more than 10 epochs with early stopping
 - Visualize model decisions with Grad-CAM
 - Write up conclusions and insights
 
